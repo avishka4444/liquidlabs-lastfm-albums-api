@@ -4,7 +4,7 @@ obj/
 
 .DS_Store
 
-.appsettings.Development.json
+appsettings.Development.json
 
 .env
 docker-compose.yml
