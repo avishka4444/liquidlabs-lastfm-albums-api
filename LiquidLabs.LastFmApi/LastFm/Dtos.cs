@@ -28,7 +28,6 @@ public sealed class AlbumDto
     [JsonPropertyName("url")]
     public string Url { get; init; } = "";
 
-    // Can be number OR string in Last.fm JSON
     [JsonPropertyName("playcount")]
     [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
     public int? Playcount { get; init; }
@@ -50,7 +49,6 @@ public sealed class RankAttribute
 
 public sealed class ImageDto
 {
-    // Last.fm uses "#text" for the URL
     [JsonPropertyName("#text")]
     public string? Text { get; init; }
 

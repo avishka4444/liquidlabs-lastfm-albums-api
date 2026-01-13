@@ -1,23 +1,47 @@
 using LiquidLabs.LastFmApi.Data;
+using LiquidLabs.LastFmApi.LastFm;
+using LiquidLabs.LastFmApi.Services;
 using Microsoft.Data.SqlClient;
+using Microsoft.OpenApi.Models;
+
+DotNetEnv.Env.Load(Path.Combine(Directory.GetCurrentDirectory(), "..", ".env"));
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+
 builder.Services.AddControllers();
-builder.Services.AddHttpClient<ILastFmClient, LastFmClient>(client =>
-{
-    client.BaseAddress = new Uri("https://ws.audioscrobbler.com/2.0/");
-});
+
 builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
+builder.Services.AddScoped<IAlbumService, AlbumService>();
+
+builder.Services.AddHttpClient<ILastFmClient, LastFmClient>(c =>
+{
+    c.BaseAddress = new Uri("https://ws.audioscrobbler.com");
+});
+
+// Add Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Last.fm Albums API",
+        Version = "v1",
+        Description = "API for fetching and caching top albums from Last.fm"
+    });
+});
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP requests
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Last.fm Albums API v1");
+        c.RoutePrefix = "swagger";
+    });
 }
 
 app.UseHttpsRedirection();

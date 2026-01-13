@@ -18,6 +18,7 @@ CREATE TABLE dbo.Albums
 
     Listeners       INT NULL,
     Playcount       INT NULL,
+    Rank            INT NULL,
 
     ReleaseDate     NVARCHAR(100) NULL,
 
@@ -27,7 +28,7 @@ CREATE TABLE dbo.Albums
 
     IsDetailFetched BIT NOT NULL CONSTRAINT DF_Albums_IsDetailFetched DEFAULT (0),
 
-    -- “timestamps”
+    -- timestamps
     FetchedAtUtc    DATETIME2(0) NOT NULL CONSTRAINT DF_Albums_FetchedAtUtc DEFAULT (SYSUTCDATETIME()),
     UpdatedAtUtc    DATETIME2(0) NOT NULL CONSTRAINT DF_Albums_UpdatedAtUtc DEFAULT (SYSUTCDATETIME())
 );
