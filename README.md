@@ -7,7 +7,6 @@ This is an ASP.NET Core Web API that fetches top albums from the Last.fm API and
 This API fetches top albums from Last.fm for a hardcoded artist (The Beatles) and provides RESTful endpoints to retrieve the cached album data. If data exists in the database and is fresh (within 30 minutes), it returns from the database. Otherwise, it fetches fresh data from Last.fm and saves it to the database, then returns it.
 
 https://www.last.fm/api/show/artist.getTopAlbums
-https://www.last.fm/api/show/album.getInfo
 
 ## Features
 
