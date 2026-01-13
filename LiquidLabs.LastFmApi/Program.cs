@@ -6,7 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-
+builder.Services.AddHttpClient<ILastFmClient, LastFmClient>(client =>
+{
+    client.BaseAddress = new Uri("https://ws.audioscrobbler.com/2.0/");
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
