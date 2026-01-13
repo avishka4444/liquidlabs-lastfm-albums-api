@@ -1,0 +1,6 @@
+@LiquidLabs.LastFmApi_HostAddress = http://localhost:5215
+
+GET {{LiquidLabs.LastFmApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
