@@ -1,6 +1,6 @@
-using LiquidLabs.LastFmApi.LastFm;
+namespace LiquidLabs.LastFmApi.LastFm;
 
 public interface ILastFmClient
 {
-    Task<IReadOnlyList<AlbumDto>> GetTopAlbumsAsync(string artist);
+    Task<TopAlbumsResponse> GetTopAlbumsAsync(string artist);
 }

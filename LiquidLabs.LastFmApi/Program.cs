@@ -1,3 +1,4 @@
+using LiquidLabs.LastFmApi.Data;
 using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddHttpClient<ILastFmClient, LastFmClient>(client =>
 {
     client.BaseAddress = new Uri("https://ws.audioscrobbler.com/2.0/");
 });
+builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
